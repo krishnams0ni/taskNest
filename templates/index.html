@@ -6,35 +6,63 @@
 </head>
 <body>
 <style>
-    html {
-        height: 100%;
-        display: table;
-        margin: auto;
+    * {
         font-size: 20px;
     }
+    html {
+        padding: 10px 0;
+        display: table;
+        margin: auto;
+    }
     body {
-        height: 100%;
-        display: table-cell;
         vertical-align: middle;
+        justify-content: center;
+        display: flex;
+        gap: 100px;
     }
     table, th, td {
         border: 2px solid black;
     }
-    td, th {
-        padding: 3px 9px;
+    input {
+        background-color: transparent
     }
 </style>
 <table>
     <tr>
         <th>S. No.</th>
         <th>Tasks</th>
+        <th></th>
     </tr>
     {% for i in data %}
         <tr>
             <td>{{ loop.index }}</td>
-            <td>{{ i }}</td>
+            <td>{{ i.data }}</td>
+            <td><form method="POST" action="/delete/{{ i.id }}">
+                <input type="submit" value="Delete">
+            </form></td>
         </tr>
     {% endfor %}
+    <form method="POST">
+        <tr>
+            <td></td>
+            <td>
+                <input type="text" name="task_data" placeholder="Add task">
+            </td>
+            <td><form method="POST">
+                <input type="submit" value="Submit">
+            </form></td>
+        </tr>
+    </form>
 </table>
+<div id="info">
+
+{% if not get_flashed_messages() %}
+    <p>Welcome!</p>
+{% else %}
+    {% for msg in get_flashed_messages() %}
+            <p>{{ msg }}</p>
+    {% endfor %}
+{% endif %}
+</div>
 </body>
 </html>
