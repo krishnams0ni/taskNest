@@ -3,44 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <title>taskNest</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #f5f5f5;
+            background-color: #1a1919;
+            margin: 0 auto;
+            padding: 20px;
+            width: 50%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th, ::placeholder {
+            background-color: #373434;
+        }
+
+        input[type="text"],
+        input[type="submit"] {
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            width: 100%;
+            box-sizing: border-box;
+            background-color: #454545;
+        }
+
+        ::placeholder {
+            color: white;
+            border-right: 10px;
+            opacity: 1;
+        }
+
+        th:first-child,
+        td:first-child {
+            width: 6%;
+        }
+
+        th:nth-child(2),
+        td:nth-child(2) {
+            width: 60%;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            white-space: normal;
+            word-wrap: break-word;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-<style>
-    * {
-        font-size: 20px;
-    }
-    html {
-        padding: 10px 0;
-        display: table;
-        margin: auto;
-    }
-    body {
-        vertical-align: middle;
-        justify-content: center;
-        display: flex;
-        gap: 100px;
-    }
-    table, th, td {
-        border: 2px solid black;
-    }
-    input {
-        background-color: transparent
-    }
-</style>
 <table>
     <tr>
         <th>S. No.</th>
         <th>Tasks</th>
         <th></th>
+        <th></th>
     </tr>
     {% for i in data %}
-        <tr>
-            <td>{{ loop.index }}</td>
-            <td>{{ i.data }}</td>
-            <td><form method="POST" action="/delete/{{ i.id }}">
-                <input type="submit" value="Delete">
-            </form></td>
-        </tr>
+    <tr>
+        <td align="center">{{ loop.index }}</td>
+        {% if id == i.id %}
+        <form method="POST" action="/edit/{{ i.id }}">
+            <td>
+                <input type="text" name="edited_task" value="{{ task_to_edit.data }}">
+            </td>
+            <td colspan="2"><input type="submit" value="Submit"></td>
+        </form>
+        {% else %}
+        <td>{{ i.data }}</td>
+        <td><form method="GET" action="/edit/{{ i.id }}">
+            <input type="submit" value="Modify">
+        </form></td>
+        <td><form method="POST" action="/delete/{{ i.id }}">
+            <input type="submit" value="Delete">
+        </form></td>
+        {% endif %}
+    </tr>
     {% endfor %}
     <form method="POST">
         <tr>
@@ -48,21 +108,26 @@
             <td>
                 <input type="text" name="task_data" placeholder="Add task">
             </td>
-            <td><form method="POST">
+            <td colspan="2"><form method="POST">
                 <input type="submit" value="Submit">
             </form></td>
         </tr>
     </form>
 </table>
 <div id="info">
-
-{% if not get_flashed_messages() %}
+    {% if not get_flashed_messages() %}
     <p>Welcome!</p>
-{% else %}
+    {% else %}
     {% for msg in get_flashed_messages() %}
-            <p>{{ msg }}</p>
+    <p>{{ msg }}</p>
     {% endfor %}
-{% endif %}
+    {% endif %}
+
+    <a href="https://krishnams0ni.github.io/" target="_blank">I</a> made this project to get the hang
+    of Flask—it was my first go at it. Learned a bunch of cool stuff along the way!
+    This site was made using:
+    - <a href="https://github.com/pallets/flask/" target="_blank">Python & Flask</a>
+    - <a href="https://www.sqlite.org" target="_blank">SQLite (as DB)</a>
 </div>
 </body>
 </html>

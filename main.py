@@ -27,6 +27,9 @@ def home():
             db.session.commit()
             flash("Task added!", "info")
             return redirect("/")
+        else:
+            flash("Task cannot be empty.")
+            return redirect("/")
     data = tasks.query.all()
     return render_template("index.html", data=data)
 
@@ -38,6 +41,27 @@ def delete_task(task_id):
     db.session.commit()
     flash("Task deleted!", "info")
     return redirect("/")
+
+
+@app.route("/edit/<int:task_id>", methods=["GET", "POST"])
+def edit_task(task_id):
+    task_to_edit = tasks.query.get_or_404(task_id)
+
+    if request.method == "POST":
+        edited_data = request.form["edited_task"]
+        if edited_data == "":
+            flash("Task cannot be empty.")
+            return redirect("/")
+        task_to_edit.data = edited_data
+        db.session.commit()
+        flash("Task updated!", "info")
+        return redirect("/")
+
+    flash("Edit task.")
+    data = tasks.query.all()
+    return render_template(
+        "index.html", data=data, id=task_id, task_to_edit=task_to_edit
+    )
 
 
 if __name__ == "__main__":
