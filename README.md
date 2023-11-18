@@ -1,7 +1,6 @@
-This is my first flask project. Learned a lot of things along the way.<br>
+### taskNest • A Task Manager
+This is my first flask project. Learned a lot of things along the way.
 Made using:
-<ul>
-    <li>Python & Flask (as backend)</li>
-    <li>HTML & CSS (as frontend)</li>
-    <li>SQLite (as DB)</li>
-</ul>
+- Python & Flask (as backend)
+- HTML & CSS (as frontend)
+- SQLite (as DB)
