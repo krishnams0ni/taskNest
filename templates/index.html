@@ -3,75 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>taskNest</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            color: #f5f5f5;
-            background-color: #1a1919;
-            margin: 0 auto;
-            padding: 20px;
-            width: 50%;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            table-layout: fixed;
-        }
-
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-
-        th, ::placeholder {
-            background-color: #373434;
-        }
-
-        input[type="text"],
-        input[type="submit"] {
-            padding: 8px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-            width: 100%;
-            box-sizing: border-box;
-            background-color: #454545;
-        }
-
-        ::placeholder {
-            color: white;
-            border-right: 10px;
-            opacity: 1;
-        }
-
-        th:first-child,
-        td:first-child {
-            width: 6%;
-        }
-
-        th:nth-child(2),
-        td:nth-child(2) {
-            width: 60%;
-        }
-
-        input[type="submit"] {
-            background-color: #007bff;
-            color: #fff;
-            cursor: pointer;
-            white-space: normal;
-            word-wrap: break-word;
-        }
-
-        a {
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <link rel="stylesheet" href = "{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 <table>
@@ -122,12 +54,17 @@
     <p>{{ msg }}</p>
     {% endfor %}
     {% endif %}
-
-    <a href="https://krishnams0ni.github.io/" target="_blank">I</a> made this project to get the hang
-    of Flask—it was my first go at it. Learned a bunch of cool stuff along the way!
+</div>
+<div>
+    This is my first flask project. Learned a lot of things along the way.
     This site was made using:
-    - <a href="https://github.com/pallets/flask/" target="_blank">Python & Flask</a>
-    - <a href="https://www.sqlite.org" target="_blank">SQLite (as DB)</a>
+    <ul>
+        <li>Python & Flask (as backend)</li>
+        <li>HTML & CSS (as frontend)</li>
+        <li>SQLite (as DB)</li>
+    </ul>
+    View page source: <a href="https://github.com/krishnams0ni/taskNest" target="_blank">Here</a><br>
+    Know more about me: <a href="https://krishnams0ni.github.io/" target="_blank">Here</a>
 </div>
 </body>
 </html>

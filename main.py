@@ -25,7 +25,7 @@ def home():
             new_task = tasks(data=task)
             db.session.add(new_task)
             db.session.commit()
-            flash("Task added!", "info")
+            flash("Task added!")
             return redirect("/")
         else:
             flash("Task cannot be empty.")
@@ -39,7 +39,7 @@ def delete_task(task_id):
     task_to_delete = tasks.query.get_or_404(task_id)
     db.session.delete(task_to_delete)
     db.session.commit()
-    flash("Task deleted!", "info")
+    flash("Task deleted!")
     return redirect("/")
 
 
@@ -48,13 +48,16 @@ def edit_task(task_id):
     task_to_edit = tasks.query.get_or_404(task_id)
 
     if request.method == "POST":
-        edited_data = request.form["edited_task"]
-        if edited_data == "":
-            flash("Task cannot be empty.")
-            return redirect("/")
-        task_to_edit.data = edited_data
-        db.session.commit()
-        flash("Task updated!", "info")
+        try:
+            edited_data = request.form["edited_task"]
+            if edited_data == "":
+                flash("Task cannot be empty.")
+                return redirect("/")
+            task_to_edit.data = edited_data
+            db.session.commit()
+            flash("Task updated!")
+        except:
+            flash("Unsuccessful.")
         return redirect("/")
 
     flash("Edit task.")
