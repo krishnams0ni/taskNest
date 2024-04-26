@@ -1,4 +1,4 @@
-### taskNest • A Task Manager
+### taskNest • A ToDo App
 This is my first flask project. Learned a lot of things along the way.
 Made using:
 - Python & Flask (as backend)
